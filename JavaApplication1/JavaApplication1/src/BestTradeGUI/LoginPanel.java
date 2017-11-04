@@ -14,8 +14,12 @@ public class LoginPanel extends javax.swing.JPanel {
     /**
      * Creates new form LoginPanel
      */
+    boolean clickUserName = false;
+    boolean clickPassword = false;
+    
     public LoginPanel() {
         initComponents();
+        
     }
 
     /**
@@ -53,15 +57,25 @@ public class LoginPanel extends javax.swing.JPanel {
         });
 
         name.setText("User Name");
+        name.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                nameMouseClicked(evt);
+            }
+        });
         name.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nameActionPerformed(evt);
+                none(evt);
             }
         });
 
         accountLabel.setText("If you do not have any accout");
 
         password.setText("jPasswordField1");
+        password.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                passwordMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -113,14 +127,31 @@ public class LoginPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_signUpButtonActionPerformed
 
-    private void nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameActionPerformed
+    private void none(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_none
         // TODO add your handling code here:
         
-    }//GEN-LAST:event_nameActionPerformed
+    }//GEN-LAST:event_none
 
     private void signInButtonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_signInButtonKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_signInButtonKeyPressed
+
+    private void nameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nameMouseClicked
+        // TODO add your handling code here:
+        if(clickUserName == false){
+        name.setText("");
+        clickUserName = true;
+        }
+    }//GEN-LAST:event_nameMouseClicked
+
+    private void passwordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passwordMouseClicked
+        // TODO add your handling code here:
+        
+        if(clickPassword == false){
+        password.setText("");
+        clickPassword = true;
+        }
+    }//GEN-LAST:event_passwordMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -76,7 +76,7 @@ public class TradeScreen extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton searchForProductButton;
-    private javax.swing.JButton viewMyProfileButton;
+    public javax.swing.JButton searchForProductButton;
+    public javax.swing.JButton viewMyProfileButton;
     // End of variables declaration//GEN-END:variables
 }

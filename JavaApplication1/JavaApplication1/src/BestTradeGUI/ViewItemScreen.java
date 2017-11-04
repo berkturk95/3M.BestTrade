@@ -27,7 +27,7 @@ public class ViewItemScreen extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        BackButton = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
         Photo = new javax.swing.JLabel();
         Category = new javax.swing.JLabel();
         Price = new javax.swing.JLabel();
@@ -37,12 +37,12 @@ public class ViewItemScreen extends javax.swing.JPanel {
         CategoryText = new javax.swing.JLabel();
         PriceText = new javax.swing.JLabel();
         ConditionText = new javax.swing.JLabel();
-        SendMessageButton = new javax.swing.JButton();
+        sendMessageButton = new javax.swing.JButton();
 
-        BackButton.setText("Back");
-        BackButton.addActionListener(new java.awt.event.ActionListener() {
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BackButtonActionPerformed(evt);
+                backButtonActionPerformed(evt);
             }
         });
 
@@ -65,10 +65,10 @@ public class ViewItemScreen extends javax.swing.JPanel {
 
         ConditionText.setText("ConditionText");
 
-        SendMessageButton.setText("Send Message");
-        SendMessageButton.addActionListener(new java.awt.event.ActionListener() {
+        sendMessageButton.setText("Send Message");
+        sendMessageButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SendMessageButtonActionPerformed(evt);
+                sendMessageButtonActionPerformed(evt);
             }
         });
 
@@ -79,7 +79,7 @@ public class ViewItemScreen extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BackButton)
+                    .addComponent(backButton)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(Photo, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -99,7 +99,7 @@ public class ViewItemScreen extends javax.swing.JPanel {
                 .addContainerGap(50, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(SendMessageButton)
+                .addComponent(sendMessageButton)
                 .addGap(84, 84, 84)
                 .addComponent(DescriptionText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -107,7 +107,7 @@ public class ViewItemScreen extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(BackButton)
+                .addComponent(backButton)
                 .addGap(58, 58, 58)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Category)
@@ -128,31 +128,31 @@ public class ViewItemScreen extends javax.swing.JPanel {
                     .addComponent(DescriptionText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(SendMessageButton)
+                        .addComponent(sendMessageButton)
                         .addGap(43, 43, 43))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_BackButtonActionPerformed
+    }//GEN-LAST:event_backButtonActionPerformed
 
-    private void SendMessageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SendMessageButtonActionPerformed
+    private void sendMessageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendMessageButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_SendMessageButtonActionPerformed
+    }//GEN-LAST:event_sendMessageButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BackButton;
-    private javax.swing.JLabel Category;
-    private javax.swing.JLabel CategoryText;
-    private javax.swing.JLabel Condition;
-    private javax.swing.JLabel ConditionText;
-    private javax.swing.JLabel Description;
-    private javax.swing.JLabel DescriptionText;
-    private javax.swing.JLabel Photo;
-    private javax.swing.JLabel Price;
-    private javax.swing.JLabel PriceText;
-    private javax.swing.JButton SendMessageButton;
+    public javax.swing.JLabel Category;
+    public javax.swing.JLabel CategoryText;
+    public javax.swing.JLabel Condition;
+    public javax.swing.JLabel ConditionText;
+    public javax.swing.JLabel Description;
+    public javax.swing.JLabel DescriptionText;
+    public javax.swing.JLabel Photo;
+    public javax.swing.JLabel Price;
+    public javax.swing.JLabel PriceText;
+    public javax.swing.JButton backButton;
+    public javax.swing.JButton sendMessageButton;
     // End of variables declaration//GEN-END:variables
 }

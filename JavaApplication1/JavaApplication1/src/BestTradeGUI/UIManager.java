@@ -9,6 +9,10 @@ package BestTradeGUI;
  *
  * @author berkt
  */
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -47,9 +51,9 @@ public class UIManager extends JFrame{
 		setLocationRelativeTo(null);
 		
 		//Content Pane
-		/*contentPane = new JPanel();
+		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(100, 100, 800, 600));
-		contentPane.setLayout(null);*/
+		contentPane.setLayout(null);
 		
 		//Initialize Panels
 		loginPanel = new LoginPanel();
@@ -76,10 +80,8 @@ public class UIManager extends JFrame{
 		sendMessageScreen.setVisible(false);
 		
 		//Adding panels to the frame
-		/*setContentPane(contentPane);
 		getContentPane().add(loginPanel);
-		getContentPane().add(tradeScreen);
-		getContentPane().add(activationCodeScreen);
+		/*getContentPane().add(activationCodeScreen);
 		getContentPane().add(signUpPanel);
 		getContentPane().add(myProfilePanel);
 		getContentPane().add(searchItemScreen);
@@ -87,20 +89,31 @@ public class UIManager extends JFrame{
 		getContentPane().add(viewItemScreen);
 		getContentPane().add(editProfilePanel);
 		getContentPane().add(sendMessageScreen);
-		//addKeyListener(new KeyPressListener());*/		//Adds key press listener to the frame
+                
+		getContentPane().add(tradeScreen);
+		setContentPane(contentPane);*/
+		//addKeyListener(new KeyPressListener());	//Adds key press listener to the frame
                 
                 
-                add(loginPanel);
-                add(tradeScreen);
-                add(activationCodeScreen);
+                /* add(loginPanel);
+                
                 add(signUpPanel);
+               add(tradeScreen);
+                add(activationCodeScreen);
+                
                 add(myProfilePanel);
                 add(searchItemScreen);
                 add(addItemScreen);
                 add(viewItemScreen);
                 add(editProfilePanel);
-                add(sendMessageScreen);
+                add(sendMessageScreen);*/
+                //
                 pack();
-                
 	}
+        
+        
+
+
+            
 }
+

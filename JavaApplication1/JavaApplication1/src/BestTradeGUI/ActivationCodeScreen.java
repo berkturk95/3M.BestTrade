@@ -79,8 +79,8 @@ public class ActivationCodeScreen extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField codeArea;
-    private javax.swing.JLabel codeLabel;
-    private javax.swing.JButton okButton;
+    public javax.swing.JTextField codeArea;
+    public javax.swing.JLabel codeLabel;
+    public javax.swing.JButton okButton;
     // End of variables declaration//GEN-END:variables
 }

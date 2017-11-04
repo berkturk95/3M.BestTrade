@@ -5,7 +5,9 @@
  */
 package BestTradeGUI;
 
-import static BestTradeGUI.UIManager.*;
+import static BestTradeGUI.UIManager.frame;
+import static BestTradeGUI.UIManager.signUpPanel;
+import static BestTradeGUI.UIManager.tradeScreen;
 
 /**
  *
@@ -74,10 +76,20 @@ public class LoginPanel extends javax.swing.JPanel {
                 nameMouseClicked(evt);
             }
         });
+        name.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                none(evt);
+            }
+        });
 
         accountLabel.setText("If you do not have any accout");
 
         password.setText("jPasswordField1");
+        password.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                passwordMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -129,20 +141,31 @@ public class LoginPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_signUpButtonActionPerformed
 
+    private void none(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_none
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_none
+
     private void signInButtonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_signInButtonKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_signInButtonKeyPressed
 
-    private void signUpButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signUpButtonMouseClicked
+    private void nameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nameMouseClicked
         // TODO add your handling code here:
-        /*setVisible(false);
-        signUpPanel.setVisible(true);*/
-        frame.getContentPane().removeAll();
-        frame.getContentPane().add(signUpPanel);
-        setVisible(false);
-        signUpPanel.setVisible(true);
+        if(clickUserName == false){
+        name.setText("");
+        clickUserName = true;
+        }
+    }//GEN-LAST:event_nameMouseClicked
+
+    private void passwordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passwordMouseClicked
+        // TODO add your handling code here:
         
-    }//GEN-LAST:event_signUpButtonMouseClicked
+        if(clickPassword == false){
+        password.setText("");
+        clickPassword = true;
+        }
+    }//GEN-LAST:event_passwordMouseClicked
 
     private void signInButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signInButtonMouseClicked
         // TODO add your handling code here:
@@ -152,20 +175,22 @@ public class LoginPanel extends javax.swing.JPanel {
         tradeScreen.setVisible(true);
     }//GEN-LAST:event_signInButtonMouseClicked
 
-    private void nameMouseClicked(java.awt.event.MouseEvent evt)
-    {
+    private void signUpButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signUpButtonMouseClicked
+        // TODO add your handling code here:
+        frame.getContentPane().removeAll();
+        frame.getContentPane().add(signUpPanel);
+        setVisible(false);
+        signUpPanel.setVisible(true);
+        System.out.print("ezgi");
         
-    }
+    }//GEN-LAST:event_signUpButtonMouseClicked
 
-    private void passwordMouseClicked(java.awt.event.MouseEvent evt) 
-    {
 
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JLabel accountLabel;
-    public javax.swing.JTextField name;
-    public javax.swing.JPasswordField password;
-    public javax.swing.JButton signInButton;
-    public javax.swing.JButton signUpButton;
+    private javax.swing.JLabel accountLabel;
+    private javax.swing.JTextField name;
+    private javax.swing.JPasswordField password;
+    private javax.swing.JButton signInButton;
+    private javax.swing.JButton signUpButton;
     // End of variables declaration//GEN-END:variables
 }

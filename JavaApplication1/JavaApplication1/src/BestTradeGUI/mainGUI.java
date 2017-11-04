@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package BestTradeGUI;
+/*package BestTradeGUI;
 
 import java.io.IOException;
 
@@ -11,11 +11,11 @@ import java.io.IOException;
  *
  * @author ezgicakir
  */
-public class mainGUI {
+/*public class mainGUI {
     public static void main(String[] args) throws IOException{
             
 		UIManager frame = new UIManager();
 		frame.setVisible(true);
 	}
 	
-}
+}*/

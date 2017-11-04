@@ -17,7 +17,7 @@ import javax.swing.border.EmptyBorder;
 @SuppressWarnings("serial")
 public class UIManager extends JFrame{
 	
-	
+	static JFrame frame;
 	static JPanel contentPane;
 	static LoginPanel loginPanel;
         static TradeScreen tradeScreen;
@@ -31,6 +31,11 @@ public class UIManager extends JFrame{
         static SendMessageScreen sendMessageScreen;
         
 	
+        public static void main(String[]args) throws IOException{
+        
+            frame = new UIManager();
+            
+        }
 	//Main Frame Constructor
 	public UIManager() throws IOException{
 
@@ -82,5 +87,8 @@ public class UIManager extends JFrame{
 		getContentPane().add(editProfilePanel);
 		getContentPane().add(sendMessageScreen);
 		//addKeyListener(new KeyPressListener());		//Adds key press listener to the frame
+                
+                frame.pack();
+                frame.setVisible(true);
 	}
 }

@@ -34,6 +34,7 @@ public class UIManager extends JFrame{
         public static void main(String[]args) throws IOException{
         
             frame = new UIManager();
+            frame.setVisible(true);
             
         }
 	//Main Frame Constructor
@@ -88,7 +89,7 @@ public class UIManager extends JFrame{
 		getContentPane().add(sendMessageScreen);
 		//addKeyListener(new KeyPressListener());		//Adds key press listener to the frame
                 
-                frame.pack();
-                frame.setVisible(true);
+                
+                
 	}
 }

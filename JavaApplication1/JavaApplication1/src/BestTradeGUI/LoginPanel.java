@@ -5,9 +5,8 @@
  */
 package BestTradeGUI;
 
-import static BestTradeGUI.UIManager.frame;
-import static BestTradeGUI.UIManager.signUpPanel;
-import static BestTradeGUI.UIManager.tradeScreen;
+import static BestTradeGUI.UIManager.*;
+
 
 /**
  *
@@ -173,6 +172,8 @@ public class LoginPanel extends javax.swing.JPanel {
         frame.getContentPane().add(tradeScreen);
         setVisible(false);
         tradeScreen.setVisible(true);
+        String username = loginPanel.name.getText();
+        String password = loginPanel.password.getText();
     }//GEN-LAST:event_signInButtonMouseClicked
 
     private void signUpButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signUpButtonMouseClicked
@@ -181,7 +182,7 @@ public class LoginPanel extends javax.swing.JPanel {
         frame.getContentPane().add(signUpPanel);
         setVisible(false);
         signUpPanel.setVisible(true);
-        System.out.print("ezgi");
+        
         
     }//GEN-LAST:event_signUpButtonMouseClicked
 

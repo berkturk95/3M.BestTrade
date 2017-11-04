@@ -5,6 +5,8 @@
  */
 package BestTradeGUI;
 
+import static BestTradeGUI.UIManager.*;
+
 /**
  *
  * @author ezgicakir
@@ -14,7 +16,11 @@ public class SignUpPanel extends javax.swing.JPanel {
     /**
      * Creates new form SignUpPanel
      */
- 
+    boolean clickName = false;
+    boolean clickPassword = false;
+    boolean clickEmail = false;
+    boolean clickSurname = false;
+    boolean clickUni = false;
     public SignUpPanel() {
         initComponents();
     }
@@ -30,7 +36,7 @@ public class SignUpPanel extends javax.swing.JPanel {
 
         signUpButton = new javax.swing.JButton();
         nameField = new javax.swing.JTextField();
-        surnameField = new javax.swing.JTextField();
+        usernameField = new javax.swing.JTextField();
         uniNameField = new javax.swing.JTextField();
         emailField = new javax.swing.JTextField();
         passwordField = new javax.swing.JTextField();
@@ -41,6 +47,11 @@ public class SignUpPanel extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
 
         signUpButton.setText("Sign Up");
+        signUpButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                signUpButtonMouseClicked(evt);
+            }
+        });
         signUpButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 signUpButtonActionPerformed(evt);
@@ -48,18 +59,43 @@ public class SignUpPanel extends javax.swing.JPanel {
         });
 
         nameField.setText("Name");
+        nameField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                nameFieldMouseClicked(evt);
+            }
+        });
 
-        surnameField.setText("Surname");
+        usernameField.setText("User Name");
+        usernameField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                usernameFieldMouseClicked(evt);
+            }
+        });
 
         uniNameField.setText("University Name");
+        uniNameField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                uniNameFieldMouseClicked(evt);
+            }
+        });
 
         emailField.setText("E-mail Address");
+        emailField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                emailFieldMouseClicked(evt);
+            }
+        });
 
         passwordField.setText("Password");
+        passwordField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                passwordFieldMouseClicked(evt);
+            }
+        });
 
         jLabel1.setText("Name");
 
-        jLabel2.setText("Surname");
+        jLabel2.setText("User Name");
 
         jLabel3.setText("University Name");
 
@@ -77,7 +113,7 @@ public class SignUpPanel extends javax.swing.JPanel {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(nameField)
-                            .addComponent(surnameField, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)))
+                            .addComponent(usernameField, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -106,7 +142,7 @@ public class SignUpPanel extends javax.swing.JPanel {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(surnameField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -130,6 +166,52 @@ public class SignUpPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_signUpButtonActionPerformed
 
+    private void signUpButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signUpButtonMouseClicked
+        // TODO add your handling code here:
+        frame.getContentPane().removeAll();
+        frame.getContentPane().add(tradeScreen);
+        setVisible(false);
+        tradeScreen.setVisible(true);
+        String username = SignUpPanel.nameField.getText();
+        String password = loginPanel.password.getText();
+    }//GEN-LAST:event_signUpButtonMouseClicked
+
+    private void nameFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nameFieldMouseClicked
+        // TODO add your handling code here:
+        if(clickName == false){
+        nameField.setText("");
+        clickName = true;
+        }
+    }//GEN-LAST:event_nameFieldMouseClicked
+
+    private void uniNameFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_uniNameFieldMouseClicked
+        // TODO add your handling code here:
+        if(clickUni == false){
+        uniNameField.setText("");
+        clickUni = true;
+        }
+    }//GEN-LAST:event_uniNameFieldMouseClicked
+
+    private void emailFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_emailFieldMouseClicked
+        // TODO add your handling code here:
+        if(clickEmail == false){
+        emailField.setText("");
+        clickEmail = true;
+        }
+    }//GEN-LAST:event_emailFieldMouseClicked
+
+    private void passwordFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passwordFieldMouseClicked
+        // TODO add your handling code here:
+        if(clickPassword == false){
+        passwordField.setText("");
+        clickPassword = true;
+        }
+    }//GEN-LAST:event_passwordFieldMouseClicked
+
+    private void usernameFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usernameFieldMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_usernameFieldMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JTextField emailField;
@@ -141,7 +223,7 @@ public class SignUpPanel extends javax.swing.JPanel {
     public javax.swing.JTextField nameField;
     public javax.swing.JTextField passwordField;
     public javax.swing.JButton signUpButton;
-    public javax.swing.JTextField surnameField;
     public javax.swing.JTextField uniNameField;
+    public javax.swing.JTextField usernameField;
     // End of variables declaration//GEN-END:variables
 }

@@ -14,6 +14,7 @@ public class SignUpPanel extends javax.swing.JPanel {
     /**
      * Creates new form SignUpPanel
      */
+ 
     public SignUpPanel() {
         initComponents();
     }

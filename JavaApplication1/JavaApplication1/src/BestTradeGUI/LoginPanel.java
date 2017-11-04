@@ -16,8 +16,12 @@ public class LoginPanel extends javax.swing.JPanel {
     /**
      * Creates new form LoginPanel
      */
+    boolean clickUserName = false;
+    boolean clickPassword = false;
+    
     public LoginPanel() {
         initComponents();
+        
     }
 
     /**
@@ -65,9 +69,9 @@ public class LoginPanel extends javax.swing.JPanel {
         });
 
         name.setText("User Name");
-        name.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nameActionPerformed(evt);
+        name.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                nameMouseClicked(evt);
             }
         });
 
@@ -125,11 +129,6 @@ public class LoginPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_signUpButtonActionPerformed
 
-    private void nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_nameActionPerformed
-
     private void signInButtonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_signInButtonKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_signInButtonKeyPressed
@@ -153,7 +152,15 @@ public class LoginPanel extends javax.swing.JPanel {
         tradeScreen.setVisible(true);
     }//GEN-LAST:event_signInButtonMouseClicked
 
+    private void nameMouseClicked(java.awt.event.MouseEvent evt)
+    {
+        
+    }
 
+    private void passwordMouseClicked(java.awt.event.MouseEvent evt) 
+    {
+
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JLabel accountLabel;
     public javax.swing.JTextField name;

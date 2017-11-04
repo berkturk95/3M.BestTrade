@@ -17,7 +17,7 @@ import javax.swing.border.EmptyBorder;
 @SuppressWarnings("serial")
 public class UIManager extends JFrame{
 	
-	static JFrame frame;
+	
 	static JPanel contentPane;
 	static LoginPanel loginPanel;
         static TradeScreen tradeScreen;
@@ -30,11 +30,6 @@ public class UIManager extends JFrame{
         static EditProfilePanel editProfilePanel;
         static SendMessageScreen sendMessageScreen;
         
-	public static void main(String[] args) throws IOException{
-            
-		frame = new UIManager();
-		frame.setVisible(true);
-	}
 	
 	//Main Frame Constructor
 	public UIManager() throws IOException{

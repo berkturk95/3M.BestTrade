@@ -5,6 +5,8 @@
  */
 package BestTradeGUI;
 
+import static BestTradeGUI.UIManager.*;
+
 /**
  *
  * @author ezgicakir
@@ -37,6 +39,12 @@ public class SendMessageScreen extends javax.swing.JPanel {
         messageArea = new javax.swing.JTextArea();
         sendBut = new javax.swing.JButton();
 
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                formKeyTyped(evt);
+            }
+        });
+
         jButton1.setText("Back");
 
         jLabel1.setText("To");
@@ -45,11 +53,27 @@ public class SendMessageScreen extends javax.swing.JPanel {
 
         jLabel3.setText("Message");
 
+        subjectField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                subjectFieldKeyTyped(evt);
+            }
+        });
+
         messageArea.setColumns(20);
         messageArea.setRows(5);
+        messageArea.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                messageAreaKeyTyped(evt);
+            }
+        });
         jScrollPane1.setViewportView(messageArea);
 
         sendBut.setText("Send");
+        sendBut.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sendButMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -98,6 +122,29 @@ public class SendMessageScreen extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formKeyTyped
+
+    private void subjectFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_subjectFieldKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_subjectFieldKeyTyped
+
+    private void messageAreaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_messageAreaKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_messageAreaKeyTyped
+
+    private void sendButMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sendButMouseClicked
+        // TODO add your handling code here:
+        frame.getContentPane().removeAll();
+        frame.getContentPane().add(viewItemScreen);
+        setVisible(false);
+        viewItemScreen.setVisible(true);
+        String message = messageArea.getText();
+        String to = toField.getText();
+        String subject = subjectField.getText();
+    }//GEN-LAST:event_sendButMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -36,9 +36,9 @@ public class LoginPanel extends javax.swing.JPanel {
 
         signInButton = new javax.swing.JButton();
         signUpButton = new javax.swing.JButton();
-        name = new javax.swing.JTextField();
+        userNameField = new javax.swing.JTextField();
         accountLabel = new javax.swing.JLabel();
-        password = new javax.swing.JPasswordField();
+        passwordField = new javax.swing.JPasswordField();
 
         signInButton.setText("Sign In");
         signInButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -69,13 +69,13 @@ public class LoginPanel extends javax.swing.JPanel {
             }
         });
 
-        name.setText("User Name");
-        name.addMouseListener(new java.awt.event.MouseAdapter() {
+        userNameField.setText("User Name");
+        userNameField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                nameMouseClicked(evt);
+                userNameFieldMouseClicked(evt);
             }
         });
-        name.addActionListener(new java.awt.event.ActionListener() {
+        userNameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 none(evt);
             }
@@ -83,10 +83,10 @@ public class LoginPanel extends javax.swing.JPanel {
 
         accountLabel.setText("If you do not have any accout");
 
-        password.setText("jPasswordField1");
-        password.addMouseListener(new java.awt.event.MouseAdapter() {
+        passwordField.setText("jPasswordField1");
+        passwordField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                passwordMouseClicked(evt);
+                passwordFieldMouseClicked(evt);
             }
         });
 
@@ -97,8 +97,8 @@ public class LoginPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(122, 122, 122)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(password, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                    .addComponent(name))
+                    .addComponent(passwordField)
+                    .addComponent(userNameField))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -119,10 +119,10 @@ public class LoginPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(userNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(accountLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(121, 121, 121)
                         .addComponent(signUpButton, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)))
@@ -149,22 +149,22 @@ public class LoginPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_signInButtonKeyPressed
 
-    private void nameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nameMouseClicked
+    private void userNameFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userNameFieldMouseClicked
         // TODO add your handling code here:
         if(clickUserName == false){
-        name.setText("");
+        userNameField.setText("");
         clickUserName = true;
         }
-    }//GEN-LAST:event_nameMouseClicked
+    }//GEN-LAST:event_userNameFieldMouseClicked
 
-    private void passwordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passwordMouseClicked
+    private void passwordFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passwordFieldMouseClicked
         // TODO add your handling code here:
         
         if(clickPassword == false){
-        password.setText("");
+        passwordField.setText("");
         clickPassword = true;
         }
-    }//GEN-LAST:event_passwordMouseClicked
+    }//GEN-LAST:event_passwordFieldMouseClicked
 
     private void signInButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signInButtonMouseClicked
         // TODO add your handling code here:
@@ -172,8 +172,8 @@ public class LoginPanel extends javax.swing.JPanel {
         frame.getContentPane().add(tradeScreen);
         setVisible(false);
         tradeScreen.setVisible(true);
-        String username = loginPanel.name.getText();
-        String password = loginPanel.password.getText();
+        String username = userNameField.getText();
+        String password = passwordField.getSelectedText();
     }//GEN-LAST:event_signInButtonMouseClicked
 
     private void signUpButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signUpButtonMouseClicked
@@ -189,9 +189,9 @@ public class LoginPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel accountLabel;
-    private javax.swing.JTextField name;
-    private javax.swing.JPasswordField password;
+    private javax.swing.JPasswordField passwordField;
     private javax.swing.JButton signInButton;
     private javax.swing.JButton signUpButton;
+    private javax.swing.JTextField userNameField;
     // End of variables declaration//GEN-END:variables
 }

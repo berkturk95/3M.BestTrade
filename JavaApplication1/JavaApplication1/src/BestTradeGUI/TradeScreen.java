@@ -5,6 +5,8 @@
  */
 package BestTradeGUI;
 
+import static BestTradeGUI.UIManager.*;
+
 /**
  *
  * @author User
@@ -31,13 +33,18 @@ public class TradeScreen extends javax.swing.JPanel {
         viewMyProfileButton = new javax.swing.JButton();
 
         searchForProductButton.setText("Search For Product");
-        searchForProductButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchForProductButtonActionPerformed(evt);
+        searchForProductButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                searchForProductButtonMouseClicked(evt);
             }
         });
 
         viewMyProfileButton.setText("View My Profile");
+        viewMyProfileButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                viewMyProfileButtonMouseClicked(evt);
+            }
+        });
         viewMyProfileButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 viewMyProfileButtonActionPerformed(evt);
@@ -66,13 +73,25 @@ public class TradeScreen extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void searchForProductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchForProductButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_searchForProductButtonActionPerformed
-
     private void viewMyProfileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewMyProfileButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_viewMyProfileButtonActionPerformed
+
+    private void searchForProductButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchForProductButtonMouseClicked
+        // TODO add your handling code here:
+        frame.getContentPane().removeAll();
+        frame.getContentPane().add(searchItemScreen);
+        setVisible(false);
+        searchItemScreen.setVisible(true);
+    }//GEN-LAST:event_searchForProductButtonMouseClicked
+
+    private void viewMyProfileButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewMyProfileButtonMouseClicked
+        // TODO add your handling code here:
+        frame.getContentPane().removeAll();
+        frame.getContentPane().add(myProfilePanel);
+        setVisible(false);
+        myProfilePanel.setVisible(true);
+    }//GEN-LAST:event_viewMyProfileButtonMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

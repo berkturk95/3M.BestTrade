@@ -5,6 +5,8 @@
  */
 package BestTradeGUI;
 
+import static BestTradeGUI.UIManager.*;
+
 /**
  *
  * @author ibrah
@@ -39,7 +41,18 @@ public class ViewItemScreen extends javax.swing.JPanel {
         ConditionText = new javax.swing.JLabel();
         sendMessageButton = new javax.swing.JButton();
 
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
+
         backButton.setText("Back");
+        backButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                backButtonMouseClicked(evt);
+            }
+        });
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backButtonActionPerformed(evt);
@@ -139,7 +152,22 @@ public class ViewItemScreen extends javax.swing.JPanel {
 
     private void sendMessageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendMessageButtonActionPerformed
         // TODO add your handling code here:
+        frame.getContentPane().removeAll();
+        frame.getContentPane().add(sendMessageScreen);
+        setVisible(false);
+        sendMessageScreen.setVisible(true);
     }//GEN-LAST:event_sendMessageButtonActionPerformed
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formMouseClicked
+
+    private void backButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backButtonMouseClicked
+        // TODO add your handling code here:frame.getContentPane().removeAll();
+        frame.getContentPane().add(searchItemScreen);
+        setVisible(false);
+        searchItemScreen.setVisible(true);
+    }//GEN-LAST:event_backButtonMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

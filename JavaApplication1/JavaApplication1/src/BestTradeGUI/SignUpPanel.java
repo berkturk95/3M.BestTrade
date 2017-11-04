@@ -19,7 +19,7 @@ public class SignUpPanel extends javax.swing.JPanel {
     boolean clickName = false;
     boolean clickPassword = false;
     boolean clickEmail = false;
-    boolean clickSurname = false;
+    boolean clickUsername = false;
     boolean clickUni = false;
     public SignUpPanel() {
         initComponents();
@@ -45,6 +45,7 @@ public class SignUpPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        backBut = new javax.swing.JButton();
 
         signUpButton.setText("Sign Up");
         signUpButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -103,6 +104,14 @@ public class SignUpPanel extends javax.swing.JPanel {
 
         jLabel5.setText("Password");
 
+        backBut.setText("BACK");
+        backBut.setToolTipText("");
+        backBut.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                backButMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -129,14 +138,21 @@ public class SignUpPanel extends javax.swing.JPanel {
                             .addComponent(passwordField))))
                 .addGap(53, 53, 53))
             .addGroup(layout.createSequentialGroup()
-                .addGap(136, 136, 136)
-                .addComponent(signUpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(136, 136, 136)
+                        .addComponent(signUpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(backBut, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(52, 52, 52)
+                .addGap(11, 11, 11)
+                .addComponent(backBut, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -169,11 +185,14 @@ public class SignUpPanel extends javax.swing.JPanel {
     private void signUpButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signUpButtonMouseClicked
         // TODO add your handling code here:
         frame.getContentPane().removeAll();
-        frame.getContentPane().add(tradeScreen);
+        frame.getContentPane().add(activationCodeScreen);
         setVisible(false);
-        tradeScreen.setVisible(true);
-        String username = SignUpPanel.nameField.getText();
-        String password = loginPanel.password.getText();
+        activationCodeScreen.setVisible(true);
+        String name = nameField.getText();
+        String username = usernameField.getText();
+        String password = passwordField.getText();
+        String uniname = uniNameField.getText();
+        String email = emailField.getText();
     }//GEN-LAST:event_signUpButtonMouseClicked
 
     private void nameFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nameFieldMouseClicked
@@ -210,10 +229,23 @@ public class SignUpPanel extends javax.swing.JPanel {
 
     private void usernameFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usernameFieldMouseClicked
         // TODO add your handling code here:
+        if(clickUsername == false){
+          usernameField.setText("");
+           clickUsername = true;
+        }
     }//GEN-LAST:event_usernameFieldMouseClicked
+
+    private void backButMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backButMouseClicked
+        // TODO add your handling code here:
+        frame.getContentPane().removeAll();
+        frame.getContentPane().add(loginPanel);
+        setVisible(false);
+        loginPanel.setVisible(true);
+    }//GEN-LAST:event_backButMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backBut;
     public javax.swing.JTextField emailField;
     public javax.swing.JLabel jLabel1;
     public javax.swing.JLabel jLabel2;

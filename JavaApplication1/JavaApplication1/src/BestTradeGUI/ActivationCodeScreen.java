@@ -5,6 +5,8 @@
  */
 package BestTradeGUI;
 
+import static BestTradeGUI.UIManager.*;
+
 /**
  *
  * @author User
@@ -30,15 +32,32 @@ public class ActivationCodeScreen extends javax.swing.JPanel {
         codeArea = new javax.swing.JTextField();
         codeLabel = new javax.swing.JLabel();
         okButton = new javax.swing.JButton();
+        backBut = new javax.swing.JButton();
 
-        codeArea.setText("Activation Code");
+        codeArea.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                codeAreaKeyTyped(evt);
+            }
+        });
 
         codeLabel.setText("Please enter the Activation Code");
 
         okButton.setText("OK");
+        okButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                okButtonMouseClicked(evt);
+            }
+        });
         okButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 okButtonActionPerformed(evt);
+            }
+        });
+
+        backBut.setText("BACK");
+        backBut.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                backButMouseClicked(evt);
             }
         });
 
@@ -49,25 +68,29 @@ public class ActivationCodeScreen extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(190, 190, 190)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(codeArea, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(25, 25, 25)
-                                .addComponent(okButton))))
+                        .addGap(215, 215, 215)
+                        .addComponent(okButton))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(155, 155, 155)
-                        .addComponent(codeLabel)))
+                        .addComponent(codeLabel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(190, 190, 190)
+                        .addComponent(codeArea, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(backBut, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(163, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(61, 61, 61)
+                .addGap(14, 14, 14)
+                .addComponent(backBut, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(codeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(codeArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addComponent(codeArea, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(okButton)
                 .addContainerGap(174, Short.MAX_VALUE))
         );
@@ -77,8 +100,31 @@ public class ActivationCodeScreen extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_okButtonActionPerformed
 
+    private void okButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_okButtonMouseClicked
+        // TODO add your handling code here:
+        frame.getContentPane().removeAll();
+        frame.getContentPane().add(tradeScreen);
+        setVisible(false);
+        tradeScreen.setVisible(true);
+        
+    }//GEN-LAST:event_okButtonMouseClicked
+
+    private void codeAreaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_codeAreaKeyTyped
+        // TODO add your handling code here:
+        String activCode = codeArea.getText();
+    }//GEN-LAST:event_codeAreaKeyTyped
+
+    private void backButMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backButMouseClicked
+        // TODO add your handling code here:
+        frame.getContentPane().removeAll();
+        frame.getContentPane().add(signUpPanel);
+        setVisible(false);
+        signUpPanel.setVisible(true);
+    }//GEN-LAST:event_backButMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backBut;
     public javax.swing.JTextField codeArea;
     public javax.swing.JLabel codeLabel;
     public javax.swing.JButton okButton;

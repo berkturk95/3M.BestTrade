@@ -19,8 +19,8 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="password" max="32767" attributes="0"/>
-                  <Component id="name" max="32767" attributes="0"/>
+                  <Component id="passwordField" max="32767" attributes="0"/>
+                  <Component id="userNameField" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="85" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -48,11 +48,11 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="name" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="userNameField" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="accountLabel" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="password" min="-2" pref="20" max="-2" attributes="0"/>
+                      <Component id="passwordField" min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="121" max="-2" attributes="0"/>
@@ -86,12 +86,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="signUpButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="name">
+    <Component class="javax.swing.JTextField" name="userNameField">
       <Properties>
         <Property name="text" type="java.lang.String" value="User Name"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="nameMouseClicked"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="userNameFieldMouseClicked"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="none"/>
       </Events>
     </Component>
@@ -100,12 +100,12 @@
         <Property name="text" type="java.lang.String" value="If you do not have any accout"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JPasswordField" name="password">
+    <Component class="javax.swing.JPasswordField" name="passwordField">
       <Properties>
         <Property name="text" type="java.lang.String" value="jPasswordField1"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="passwordMouseClicked"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="passwordFieldMouseClicked"/>
       </Events>
     </Component>
   </SubComponents>

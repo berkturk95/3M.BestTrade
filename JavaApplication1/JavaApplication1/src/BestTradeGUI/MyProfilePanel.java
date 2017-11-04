@@ -5,6 +5,8 @@
  */
 package BestTradeGUI;
 
+import static BestTradeGUI.UIManager.*;
+
 /**
  *
  * @author berkt
@@ -32,8 +34,8 @@ public class MyProfilePanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         editProfile = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        backBut = new javax.swing.JButton();
         messagesBut = new javax.swing.JButton();
+        backBut = new javax.swing.JButton();
 
         jLabel1.setText("Name Surname");
 
@@ -42,25 +44,26 @@ public class MyProfilePanel extends javax.swing.JPanel {
         jLabel3.setText("E-mail");
 
         editProfile.setText("Edit Profile");
-        editProfile.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editProfileActionPerformed(evt);
+        editProfile.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                editProfileMouseClicked(evt);
             }
         });
 
         jLabel4.setText("Lists of the things I am selling");
 
-        backBut.setText("Back");
-        backBut.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backButActionPerformed(evt);
+        messagesBut.setText("Messages");
+        messagesBut.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                messagesButMouseClicked(evt);
             }
         });
 
-        messagesBut.setText("Messages");
-        messagesBut.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                messagesButActionPerformed(evt);
+        backBut.setText("BACK");
+        backBut.setToolTipText("");
+        backBut.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                backButMouseClicked(evt);
             }
         });
 
@@ -68,65 +71,69 @@ public class MyProfilePanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(96, 96, 96)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(editProfile)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 402, Short.MAX_VALUE)
-                        .addComponent(messagesBut, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(80, 80, 80))
             .addGroup(layout.createSequentialGroup()
-                .addGap(73, 73, 73)
-                .addComponent(jLabel4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(backBut)
-                .addGap(123, 123, 123))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(73, 73, 73)
+                        .addComponent(jLabel4))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(backBut, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(96, 96, 96)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(messagesBut, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(editProfile)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))))
+                .addContainerGap(288, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(61, 61, 61)
-                .addComponent(backBut)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(14, 14, 14)
+                .addComponent(backBut, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(59, 59, 59)
                 .addComponent(jLabel1)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(messagesBut, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(27, 27, 27)
+                .addComponent(jLabel2)
+                .addGap(19, 19, 19)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(editProfile)
-                .addGap(59, 59, 59)
+                .addGap(3, 3, 3)
+                .addComponent(messagesBut, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel4)
-                .addContainerGap(188, Short.MAX_VALUE))
+                .addContainerGap(115, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void editProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProfileActionPerformed
+    private void editProfileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editProfileMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_editProfileActionPerformed
+        frame.getContentPane().removeAll();
+        frame.getContentPane().add(editProfilePanel);
+        setVisible(false);
+        editProfilePanel.setVisible(true);
+    }//GEN-LAST:event_editProfileMouseClicked
 
-    private void backButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButActionPerformed
+    private void backButMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backButMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_backButActionPerformed
+        frame.getContentPane().removeAll();
+        frame.getContentPane().add(tradeScreen);
+        setVisible(false);
+        tradeScreen.setVisible(true);
+    }//GEN-LAST:event_backButMouseClicked
 
-    private void messagesButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_messagesButActionPerformed
+    private void messagesButMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_messagesButMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_messagesButActionPerformed
+        //MESSAGES WILL BE DISPLAYED ON ANOTHER FRAME
+    }//GEN-LAST:event_messagesButMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton backBut;
+    private javax.swing.JButton backBut;
     public javax.swing.JButton editProfile;
     public javax.swing.JLabel jLabel1;
     public javax.swing.JLabel jLabel2;

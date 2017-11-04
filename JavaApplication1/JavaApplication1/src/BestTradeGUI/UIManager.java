@@ -13,7 +13,7 @@ import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-//
+
 @SuppressWarnings("serial")
 public class UIManager extends JFrame{
 	
@@ -91,6 +91,15 @@ public class UIManager extends JFrame{
                 
                 
                 add(loginPanel);
+                add(tradeScreen);
+                add(activationCodeScreen);
+                add(signUpPanel);
+                add(myProfilePanel);
+                add(searchItemScreen);
+                add(addItemScreen);
+                add(viewItemScreen);
+                add(editProfilePanel);
+                add(sendMessageScreen);
                 pack();
                 
 	}

@@ -9,7 +9,7 @@ package BestTradeGUI;
  *
  * @author ibrah
  */
-public class ViewItemScreen extends javax.swing.JFrame {
+public class ViewItemScreen extends javax.swing.JPanel {
 
     /**
      * Creates new form ViewItem
@@ -27,26 +27,27 @@ public class ViewItemScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Back = new javax.swing.JButton();
+        BackButton = new javax.swing.JButton();
+        Photo = new javax.swing.JLabel();
         Category = new javax.swing.JLabel();
         Price = new javax.swing.JLabel();
         Condition = new javax.swing.JLabel();
-        DescriptionText = new javax.swing.JLabel();
-        Image = new javax.swing.JLabel();
-        SendMessageButton = new javax.swing.JButton();
         Description = new javax.swing.JLabel();
+        DescriptionText = new javax.swing.JLabel();
         CategoryText = new javax.swing.JLabel();
         PriceText = new javax.swing.JLabel();
         ConditionText = new javax.swing.JLabel();
+        SendMessageButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        Back.setText("Back");
-        Back.addActionListener(new java.awt.event.ActionListener() {
+        BackButton.setText("Back");
+        BackButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BackActionPerformed(evt);
+                BackButtonActionPerformed(evt);
             }
         });
+
+        Photo.setBackground(new java.awt.Color(0, 0, 255));
+        Photo.setText("Photo");
 
         Category.setText("Category");
 
@@ -54,9 +55,15 @@ public class ViewItemScreen extends javax.swing.JFrame {
 
         Condition.setText("Condition");
 
+        Description.setText("Description");
+
         DescriptionText.setText("DescriptionText");
 
-        Image.setText("jLabel5");
+        CategoryText.setText("CategoryText");
+
+        PriceText.setText("PriceText");
+
+        ConditionText.setText("ConditionText");
 
         SendMessageButton.setText("Send Message");
         SendMessageButton.addActionListener(new java.awt.event.ActionListener() {
@@ -65,104 +72,85 @@ public class ViewItemScreen extends javax.swing.JFrame {
             }
         });
 
-        Description.setText("Description");
-
-        CategoryText.setText("CategoryText");
-
-        PriceText.setText("PriceText");
-
-        ConditionText.setText("ConditionText");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(SendMessageButton)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(Back)
-                            .addGap(71, 71, 71)))
-                    .addComponent(Image, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(BackButton)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(Description)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(Photo, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(75, 75, 75)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Description)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(Category)
-                                .addGap(48, 48, 48)
-                                .addComponent(CategoryText))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(Price, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(Condition, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(48, 48, 48)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Category)
+                                    .addComponent(Price)
+                                    .addComponent(Condition))
+                                .addGap(60, 60, 60)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(ConditionText)
                                     .addComponent(PriceText)
-                                    .addComponent(ConditionText))))
-                        .addContainerGap(64, Short.MAX_VALUE))
-                    .addComponent(DescriptionText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(CategoryText))))))
+                .addContainerGap(50, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(SendMessageButton)
+                .addGap(84, 84, 84)
+                .addComponent(DescriptionText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Back)
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Category)
-                            .addComponent(CategoryText))
-                        .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Price)
-                            .addComponent(PriceText))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Condition)
-                            .addComponent(ConditionText)))
-                    .addComponent(Image, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addComponent(BackButton)
+                .addGap(58, 58, 58)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Category)
+                    .addComponent(CategoryText))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Price)
+                    .addComponent(PriceText)
+                    .addComponent(Photo, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Condition)
+                    .addComponent(ConditionText))
+                .addGap(18, 18, 18)
                 .addComponent(Description)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(DescriptionText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(SendMessageButton)
-                        .addGap(41, 41, 41))
-                    .addComponent(DescriptionText, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(43, 43, 43))))
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BackButtonActionPerformed
 
     private void SendMessageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SendMessageButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_SendMessageButtonActionPerformed
 
-    private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BackActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Back;
+    private javax.swing.JButton BackButton;
     private javax.swing.JLabel Category;
     private javax.swing.JLabel CategoryText;
     private javax.swing.JLabel Condition;
     private javax.swing.JLabel ConditionText;
     private javax.swing.JLabel Description;
     private javax.swing.JLabel DescriptionText;
-    private javax.swing.JLabel Image;
+    private javax.swing.JLabel Photo;
     private javax.swing.JLabel Price;
     private javax.swing.JLabel PriceText;
     private javax.swing.JButton SendMessageButton;

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package BestTradeGUI;
+
 /**
  *
  * @author ezgicakir
@@ -111,5 +112,3 @@ public class SendMessageScreen extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }
-
-//1170

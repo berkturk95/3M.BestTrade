@@ -47,9 +47,9 @@ public class UIManager extends JFrame{
 		setLocationRelativeTo(null);
 		
 		//Content Pane
-		contentPane = new JPanel();
+		/*contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(100, 100, 800, 600));
-		contentPane.setLayout(null);
+		contentPane.setLayout(null);*/
 		
 		//Initialize Panels
 		loginPanel = new LoginPanel();
@@ -76,7 +76,7 @@ public class UIManager extends JFrame{
 		sendMessageScreen.setVisible(false);
 		
 		//Adding panels to the frame
-		setContentPane(contentPane);
+		/*setContentPane(contentPane);
 		getContentPane().add(loginPanel);
 		getContentPane().add(tradeScreen);
 		getContentPane().add(activationCodeScreen);
@@ -87,9 +87,11 @@ public class UIManager extends JFrame{
 		getContentPane().add(viewItemScreen);
 		getContentPane().add(editProfilePanel);
 		getContentPane().add(sendMessageScreen);
-		//addKeyListener(new KeyPressListener());		//Adds key press listener to the frame
+		//addKeyListener(new KeyPressListener());*/		//Adds key press listener to the frame
                 
                 
+                add(loginPanel);
+                pack();
                 
 	}
 }

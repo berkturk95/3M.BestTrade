@@ -6,6 +6,9 @@
 package BestTradeGUI;
 
 import static BestTradeGUI.UIManager.*;
+import Database.Database;
+import ModelClasses.Client;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -20,9 +23,11 @@ public class LoginPanel extends javax.swing.JPanel {
     boolean clickUserName = false;
     boolean clickPassword = false;
     
+    private Database database;
+            
     public LoginPanel() {
         initComponents();
-        
+        database = new Database();
     }
 
     /**
@@ -168,12 +173,24 @@ public class LoginPanel extends javax.swing.JPanel {
 
     private void signInButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signInButtonMouseClicked
         // TODO add your handling code here:
+        
+        String username = userNameField.getText();
+        String password = new String(passwordField.getPassword());
+        Client client =  database.login(username, password);
+        if( client != null){
+        
         frame.getContentPane().removeAll();
         frame.getContentPane().add(tradeScreen);
         setVisible(false);
         tradeScreen.setVisible(true);
-        String username = userNameField.getText();
-        String password = passwordField.getSelectedText();
+        
+    }
+        else{
+            System.out.println("HATA");
+            JOptionPane.showMessageDialog(null, "Incorrect username or password", "SIGN IN ERROR" , JOptionPane.INFORMATION_MESSAGE);
+            //Pop up yapmak lazım
+            }
+       
     }//GEN-LAST:event_signInButtonMouseClicked
 
     private void signUpButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signUpButtonMouseClicked

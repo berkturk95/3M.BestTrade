@@ -1,0 +1,576 @@
+package javamysql.database;
+
+import ModelClasses.Assignments;
+import ModelClasses.Homework;
+import ModelClasses.Lab;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import ModelClasses.Person;
+import ModelClasses.Quiz;
+import ModelClasses.Student;
+import ModelClasses.TA;
+import javax.swing.ImageIcon;
+
+/**
+ *
+ * @author Berker and Ahmet
+ * @version 1 May 2016
+ */
+public class Database {
+
+    private Connection connection;
+    public String[] partsQuiz;
+    public String[] partsLab;
+    public String[] partsHW;
+    public String[] partsCI;
+    public String[] partsQuestions;
+    public static Person user = null;
+    public String[] partsAnswers;
+
+    public Person getUser(String userName, String password) {
+
+        String query = "SELECT * FROM users where id = '" + userName + "'and password= '" + password + "'";
+
+        try {
+
+            PreparedStatement praparedStatement = this.connection.prepareStatement(query);
+            ResultSet resultSet = praparedStatement.executeQuery();
+
+            if (resultSet.next() && resultSet.getString("title").equals("T")) {
+
+                String id = (resultSet.getString("id"));
+                String name = (resultSet.getString("name"));
+                String pw = (resultSet.getString("password"));
+                ImageIcon pic = null;
+
+                this.user = new TA(name, pw, id, pic);
+
+                String studentQuery = "SELECT * FROM users where TA = '" + id + "'";
+                PreparedStatement praparedStatementStudent = this.connection.prepareStatement(studentQuery);
+                ResultSet resultSetStudent = praparedStatementStudent.executeQuery();
+
+                Student student;
+
+                String studentName, studentPW, studentID, department, quizes;
+                ImageIcon studentPicture = null;
+
+                String lab = "";
+                String lab1 = "lab";
+                String question = "";
+                String answers = "";
+                double valueLab = 0;
+                Lab labb;
+
+                while (resultSetStudent.next()) {
+
+                    studentName = resultSetStudent.getString("name");
+                    studentPW = resultSetStudent.getString("password");
+                    studentID = resultSetStudent.getString("id");
+                    department = resultSetStudent.getString("department");
+                    quizes = resultSetStudent.getString("quizz");
+
+                    student = new Student(studentName, studentPW, studentID, department, studentPicture, (TA) user);
+
+                    for (int i = 1; true; i++) {
+
+                        lab = (resultSetStudent.getString(lab1 + i));
+
+                        if (lab.equals("$$")) {
+                            break;
+                        } else {
+                            try {
+                                partsLab = lab.split("\\€€");
+                                partsQuestions = partsLab[2].split("\\##");
+                                //System.out.println(partsLab[partsLab.length-1]);
+                                partsCI = partsLab[partsLab.length - 1].split("\\½½");
+                                partsAnswers = partsLab[3].split("\\%%");
+                                //if(partsLab[0] != "-") BURDA DEĞİŞİM LAZIM
+                                valueLab = Double.parseDouble(partsLab[0]);
+                                //System.out.println(parts);
+                                labb = new Lab(partsLab[1], valueLab);
+
+                                for (int l = 3; l < partsLab.length - 1; l++) {
+                                    labb.addCode(partsLab[l]);
+                                }
+
+                                if (partsQuestions != null) {
+                                    for (int m = 0; m < partsQuestions.length; m++) {
+
+                                        labb.addQuestion(partsQuestions[m]);
+                                    }
+                                }
+                                if (partsAnswers != null) {
+                                    for (int s = 0; s < partsAnswers.length; s++) {
+                                        labb.addAnswer(partsAnswers[s]);
+                                    }
+                                }
+                                if (partsCI != null) {
+                                    labb.setConsole(partsCI[0]);
+                                    labb.setInteractions(partsCI[1]);
+                                }
+                                student.addLab(labb);
+
+                            } catch (Exception e) {
+                                labb = new Lab("lab" + i, 0);
+                                student.addLab(labb);
+                            }
+
+                        }
+
+                        partsLab = null;
+                        partsQuestions = null;
+                        partsCI = null;
+                    }
+
+                    //Quiz
+                    Quiz quiz1;
+                    double valueQuiz = 0;
+
+                    if (quizes.equals("")) {
+                        partsQuiz = quizes.split("\\€€");
+
+                        for (int t = 0; t < partsQuiz.length - 1; t += 2) {
+                            //System.out.println("!!!!");
+                            valueQuiz = Double.parseDouble(partsQuiz[t + 1]);
+                            quiz1 = new Quiz(partsQuiz[t], valueQuiz);
+                            student.addQuiz(quiz1);
+                        }
+                        //System.out.println(labb.getCode(1));
+                    }
+
+                    //Homework
+                    String homework;
+                    String homework1 = "homework";
+                    String partHW1;
+                    double valueHW = 0;
+                    Homework Hw;
+
+                    for (int i = 1;; i++) {
+
+                        //System.out.println("HEyyoo");
+                        homework = (resultSetStudent.getString(homework1 + i));
+                        System.out.println(homework);
+
+                        if (homework.equals("$$")) {
+                            break;
+                        } else {
+                            try {
+                                partsHW = homework.split("\\€€");
+                                partsQuestions = partsHW[2].split("\\##");
+                                partsCI = partsHW[partsHW.length - 1].split("\\½½");
+
+                                valueHW = Double.parseDouble(partsHW[0]);
+                                //System.out.println(valueLab);
+                                Hw = new Homework(partsHW[1], valueHW);
+
+                                for (int l = 3; l < partsHW.length - 1; l++) {
+                                    Hw.addCode(partsHW[l]);
+                                }
+                                if (partsQuestions != null) {
+                                    for (int m = 0; m < partsQuestions.length; m++) {
+                                        Hw.addQuestion(partsQuestions[m]);
+                                    }
+                                    if (partsCI != null) {
+                                        Hw.setConsole(partsCI[0]);
+                                        Hw.setInteractions(partsCI[1]);
+                                    }
+                                }
+                                //System.out.println(labb.getCode(1));
+
+                                student.addHomework(Hw);
+
+                            } catch (Exception e) {
+                                Hw = new Homework("", 1);
+                                student.addHomework(Hw);
+                            }
+                        }
+                        partsHW = null;
+                        partsQuestions = null;
+                        partsCI = null;
+
+                    }
+
+                    ((TA) user).addStudent(student);
+                }
+
+            } else {
+                //Student
+                String id = (resultSet.getString("id"));
+                String name = (resultSet.getString("name"));
+                String department = (resultSet.getString("department"));
+                String pw = (resultSet.getString("password"));
+                String idTA = (resultSet.getString("TA"));
+                String quizes = (resultSet.getString("quizz"));
+
+                //TA
+                String query2 = "SELECT * FROM users where id = '" + idTA + "'and title = 'T' ";
+                PreparedStatement praparedStatementTA = this.connection.prepareStatement(query2);
+                ResultSet resultSetTA = praparedStatementTA.executeQuery();
+                resultSetTA.next();
+
+                String nameTA = (resultSetTA.getString("name"));
+                String pwTA = (resultSetTA.getString("password"));
+                ImageIcon picTA = null;//(ImageIcon)(resultSet.getBlob ("pic"));
+
+                TA Ta = new TA(nameTA, pwTA, idTA, picTA);
+                ImageIcon pic = null;//(ImageIcon)(resultSet.getBlob ("pic"));
+                user = new Student(name, pw, id, department, pic, Ta);
+                resultSetTA.close();
+                praparedStatementTA.close();
+
+                //Lab
+                String lab = "";
+                String lab1 = "lab";
+                String question = "";
+                String answers = "";
+                double valueLab = 0;
+                Lab labb;
+
+                for (int i = 1;; i++) {
+
+                    //System.out.println("HEyyoo");
+                    lab = (resultSet.getString(lab1 + i));
+
+                    if (lab.equals("$$")) {
+                        break;
+                    } else {
+                        try {
+                            partsLab = lab.split("\\€€");
+                            partsQuestions = partsLab[2].split("\\##");
+                            //System.out.println(partsLab[partsLab.length-1]);
+                            partsCI = partsLab[partsLab.length - 1].split("\\½½");
+                            partsAnswers = partsLab[3].split("\\%%");
+                            //if(partsLab[0] != "-") BURDA DEĞİŞİM LAZIM
+                            valueLab = Double.parseDouble(partsLab[0]);
+                            //System.out.println(parts);
+                            labb = new Lab(partsLab[1], valueLab);
+
+                            for (int l = 3; l < partsLab.length - 1; l++) {
+                                labb.addCode(partsLab[l]);
+                            }
+
+                            if (partsQuestions != null) {
+                                for (int m = 0; m < partsQuestions.length; m++) {
+
+                                    labb.addQuestion(partsQuestions[m]);
+                                }
+                            }
+                            if (partsAnswers != null) {
+                                for (int s = 0; s < partsAnswers.length; s++) {
+                                    labb.addAnswer(partsAnswers[s]);
+                                }
+                            }
+                            if (partsCI != null) {
+                                labb.setConsole(partsCI[0]);
+                                labb.setInteractions(partsCI[1]);
+                            }
+                            ((Student) user).addLab(labb);
+
+                        } catch (Exception e) {
+                            labb = new Lab("lab" + i, 0);
+                            ((Student) user).addLab(labb);
+                        }
+
+                    }
+
+                    partsLab = null;
+                    partsQuestions = null;
+                    partsCI = null;
+                }
+
+                //Quiz
+                Quiz quiz1;
+                double valueQuiz = 0;
+
+                if (quizes != "") {
+                    partsQuiz = quizes.split("\\€€");
+
+                    for (int t = 0; t < partsQuiz.length - 1; t += 2) {
+                        //System.out.println("!!!!");
+                        valueQuiz = Double.parseDouble(partsQuiz[t + 1]);
+                        quiz1 = new Quiz(partsQuiz[t], valueQuiz);
+                        ((Student) user).addQuiz(quiz1);
+                    }
+                    //System.out.println(labb.getCode(1));
+                }
+
+                //Homework
+                String homework;
+                String homework1 = "homework";
+                String partHW1;
+                double valueHW = 0;
+                Homework Hw;
+
+                for (int i = 1;; i++) {
+
+                    //System.out.println("HEyyoo");
+                    homework = (resultSet.getString(homework1 + i));
+
+                    if (homework.equals("$$")) {
+                        break;
+                    } else {
+                        try {
+                            partsHW = homework.split("\\€€");
+                            partsQuestions = partsHW[2].split("\\##");
+                            partsCI = partsHW[partsHW.length - 1].split("\\½½");
+
+                            valueHW = Double.parseDouble(partsHW[0]);
+                            //System.out.println(valueLab);
+                            Hw = new Homework(partsHW[1], valueHW);
+
+                            for (int l = 3; l < partsHW.length - 1; l++) {
+                                Hw.addCode(partsHW[l]);
+                            }
+                            if (partsQuestions != null) {
+                                for (int m = 0; m < partsQuestions.length; m++) {
+                                    Hw.addQuestion(partsQuestions[m]);
+                                }
+                                if (partsCI != null) {
+                                    Hw.setConsole(partsCI[0]);
+                                    Hw.setInteractions(partsCI[1]);
+                                }
+                            }
+                            //System.out.println(labb.getCode(1));
+
+                            ((Student) user).addHomework(Hw);
+
+                        } catch (Exception e) {
+                            Hw = new Homework("homework" + i, 0);
+                            ((Student) user).addHomework(Hw);
+                        }
+                    }
+                    partsHW = null;
+                    partsQuestions = null;
+                    partsCI = null;
+
+                }
+
+            }
+            praparedStatement.close();
+            resultSet.close();
+            return user;
+
+        } catch (SQLException ex) {
+
+            return null;
+        }
+    }
+
+    public boolean giveAnswer(String answer, Assignments a, Student s) {
+        String name = "";
+        String data = "";
+
+        if (a instanceof Lab || a instanceof Quiz) {
+
+            name = a.getDescription();
+
+            if (a instanceof Lab) {
+                data = ((Lab) a).getWholeCodeForUpdate();
+            } else {
+                data = ((Homework) a).getWholeCodeForUpdate();
+            }
+
+            String[] array = data.split("\\€€");
+            data = "";
+
+            if (array.length > 5) {
+                String[] answers = array[5].split("\\##");
+                String[] tmp = new String[answers.length + 1];
+                tmp[answers.length] = answer;
+
+                for (int i = 0; i < answers.length; i++) {
+                    tmp[i] = answers[i];
+                }
+
+                answers = tmp;
+
+                for (int j = 0; j < answers.length; j++) {
+                    array[5] = array[5] + answers[j] + "##";
+                }
+
+            } else {
+                return false;
+            }
+
+            for (int i = 0; i < array.length; i++) {
+                data = data + array[i] + "€€";
+            }
+
+        }
+
+        String update = "UPDATE `users` SET " + name + "= '" + data + "' WHERE id ='" + s.getID() + "'";
+
+        try {
+            PreparedStatement praparedStatement = this.connection.prepareStatement(update);
+            int updateResult = praparedStatement.executeUpdate();
+
+            if (updateResult > 0) {
+                return true;
+            } else {
+                System.out.println("Something went wrong!");
+                return false;
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+
+    }
+
+    public boolean grade(String grade, Assignments a, Student s) {
+
+        String name = "";
+        String data = "";
+
+        if (a instanceof Lab || a instanceof Quiz) {
+
+            name = a.getDescription();
+
+            if (a instanceof Lab) {
+                data = ((Lab) a).getWholeCodeForUpdate();
+            } else {
+                data = ((Homework) a).getWholeCodeForUpdate();
+            }
+
+            data = data.substring(data.indexOf("€€"));
+            data = grade + data;
+
+        } else {
+            name = "quizz";
+            String desc = a.getDescription();
+            desc = desc.substring(desc.indexOf("quiz"));
+            int number = Integer.parseInt(desc);
+
+            try {
+
+                String query = "SELECT * FROM users WHERE id='" + s.getID() + "'";
+                PreparedStatement praparedStatementQ = this.connection.prepareStatement(query);
+                ResultSet resultSet = praparedStatementQ.executeQuery();
+
+                data = resultSet.getString(name);
+
+                String[] quizes = data.split("\\€€");
+                data = "";
+                quizes[number * 2] = grade;
+
+                for (int i = 0; i < quizes.length; i++) {
+                    data = data + quizes[i] + "€€";
+                }
+
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+
+        }
+
+        String update = "UPDATE `users` SET " + name + "= '" + data + "' WHERE id ='" + s.getID() + "'";
+
+        try {
+            PreparedStatement praparedStatement = this.connection.prepareStatement(update);
+            int updateResult = praparedStatement.executeUpdate();
+
+            if (updateResult > 0) {
+                return true;
+            } else {
+                System.out.println("Something went wrong!");
+                return false;
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean giveFeedback(String feedback, Assignments a, Student s) {
+
+        String name = "";
+        String data = "";
+
+        if (a instanceof Lab || a instanceof Quiz) {
+
+            name = a.getDescription();
+
+            if (a instanceof Lab) {
+                data = ((Lab) a).getWholeCodeForUpdate();
+            } else {
+                data = ((Homework) a).getWholeCodeForUpdate();
+            }
+
+            String[] array = data.split("\\€€");
+            data = "";
+
+            if (array.length > 2) {
+                array[2] = feedback;
+            } else {
+                return false;
+            }
+
+            for (int i = 0; i < array.length; i++) {
+                data = data + array[i] + "€€";
+            }
+
+        } else {
+            name = "quizz";
+            String desc = a.getDescription();
+            desc = desc.substring(desc.indexOf("quiz"));
+            int number = Integer.parseInt(desc);
+
+            try {
+
+                String query = "SELECT * FROM users WHERE id='" + s.getID() + "'";
+                PreparedStatement praparedStatementQ = this.connection.prepareStatement(query);
+                ResultSet resultSet = praparedStatementQ.executeQuery();
+
+                data = resultSet.getString(name);
+
+                String[] quizes = data.split("\\€€");
+                data = "";
+                quizes[number] = feedback;
+
+                for (int i = 0; i < quizes.length; i++) {
+                    data = data + quizes[i] + "€€";
+                }
+
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+
+        }
+
+        String update = "UPDATE `users` SET " + name + "= '" + data + "' WHERE id ='" + s.getID() + "'";
+
+        try {
+            PreparedStatement praparedStatement = this.connection.prepareStatement(update);
+            int updateResult = praparedStatement.executeUpdate();
+
+            if (updateResult > 0) {
+                return true;
+            } else {
+                System.out.println("Something went wrong!");
+                return false;
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+
+    }
+
+    public void openConnection() {
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            this.connection = DriverManager.getConnection("jdbc:mysql://localhost/java_db", "root", "");
+            System.out.println("Connection Succesfull");
+        } catch (Exception e) {
+
+            System.out.println("Error! " + e.getMessage());
+        }
+    }
+}

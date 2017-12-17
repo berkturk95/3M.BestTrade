@@ -10,6 +10,9 @@ import Database.Database;
 import ModelClasses.Item;
 
 import java.awt.Color;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -211,10 +214,16 @@ public class ViewItemScreen extends javax.swing.JPanel {
 
     private void backButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backButtonMouseClicked
         // TODO add your handling code here:frame.getContentPane().removeAll();
-        SearchItemScreen searchItemScreen = new SearchItemScreen(database);
-        UIManager.frame.add(searchItemScreen);
-        setVisible(false);
+        SearchItemScreen searchItemScreen;
+        try {
+            searchItemScreen = new SearchItemScreen(database);
+            UIManager.frame.add(searchItemScreen);
+            setVisible(false);
         searchItemScreen.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(ViewItemScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_backButtonMouseClicked
 
 

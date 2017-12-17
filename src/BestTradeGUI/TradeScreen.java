@@ -9,7 +9,10 @@ import static BestTradeGUI.LoginPanel.*;
 import static BestTradeGUI.UIManager.*;
 import Database.Database;
 import ModelClasses.*;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -134,10 +137,17 @@ public class TradeScreen extends javax.swing.JPanel {
 
     private void searchForProductButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchForProductButtonMouseClicked
         // TODO add your handling code here:
-        SearchItemScreen searchItemScreen = new SearchItemScreen(db);
-        UIManager.frame.add(searchItemScreen);
-        setVisible(false);
-        searchItemScreen.setVisible(true);
+        SearchItemScreen searchItemScreen;
+        try {
+            searchItemScreen = new SearchItemScreen(db);
+            UIManager.frame.add(searchItemScreen);
+            setVisible(false);
+            searchItemScreen.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(TradeScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
     }//GEN-LAST:event_searchForProductButtonMouseClicked
 
     private void viewMyProfileButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewMyProfileButtonMouseClicked

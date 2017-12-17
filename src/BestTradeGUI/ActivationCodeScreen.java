@@ -9,7 +9,10 @@ import static BestTradeGUI.LoginPanel.client;
 import static BestTradeGUI.LoginPanel.items;
 import static BestTradeGUI.UIManager.*;
 import Database.Database;
+import java.io.IOException;
 import static java.lang.Integer.parseInt;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 
@@ -108,6 +111,12 @@ public class ActivationCodeScreen extends javax.swing.JPanel {
         if(activCode == database.getActivationCode()){
             
             database.addClient();
+            try {
+                database.refresh();
+            } catch (IOException ex) {
+                Logger.getLogger(ActivationCodeScreen.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            //database.client = database.justClient;
             TradeScreen TradeScreen = new TradeScreen(database);
             UIManager.frame.add(TradeScreen);
             setVisible(false);

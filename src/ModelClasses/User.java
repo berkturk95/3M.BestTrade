@@ -14,8 +14,8 @@ import java.util.ArrayList;
 public class User extends Client{
     
     public User(String userName, String password, String name, String surname, String email, String 
-            university, int userId, ArrayList <Message> messages, ArrayList <Item> items) {
-        super(userName, password, name, surname, email, university, userId, messages, items);
+            university, int userId, ArrayList <Message> messages, ArrayList <Item> items, int ActivationCode) {
+        super(userName, password, name, surname, email, university, userId, messages, items, ActivationCode);
     }
     
     

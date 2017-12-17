@@ -2,7 +2,7 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
- */
+ 
 package ModelClasses;
 
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 /**
  *
  * @author ibrah
- */
+
 public class NewClient extends Client {
     
   
@@ -32,3 +32,4 @@ public class NewClient extends Client {
     }
     
 }
+*/

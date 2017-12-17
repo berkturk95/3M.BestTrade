@@ -5,19 +5,17 @@
  */
 package Database;
 
-import MailController.SendMail;
 import ModelClasses.Client;
 import ModelClasses.Item;
 import MailController.SendMail;
-import ModelClasses.ItemN;
+
 import ModelClasses.Message;
-import ModelClasses.NewClient;
-import ModelClasses.User;
+//import ModelClasses.NewClient;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
 import java.sql.Blob;
 import java.sql.Connection;
@@ -26,20 +24,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import jdk.nashorn.internal.ir.CatchNode;
-import java.util.Properties;
 import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import javax.swing.JFileChooser;
 
 /**
  *
@@ -49,27 +36,20 @@ public class Database {
     
     private Connection connection;
     public Client client = null;
-    public NewClient justClient = null;
+//    public NewClient justClient = null;
     public String[] itemsId;
     public ArrayList <ModelClasses.Message> messagesList;
     public ArrayList <Item> itemsList = new ArrayList<Item>();
     public ArrayList <Item> myItemsList = new ArrayList <Item>();
     public int ActivationCode;
-    public  ArrayList<ItemN> itemsToPrint;
+    public  ArrayList<Item> itemsToPrint;
    public ArrayList<ImageIcon> imagesList;
-     public  ArrayList<ItemN> searchItems;
-    public void getItem(String categoryName, String prices, String type,boolean cS, boolean tS, boolean pS )
+     public  ArrayList<Item> searchItems;
+   public void getItem(String categoryName, String prices, String type,boolean cS, boolean tS, boolean pS )
     {
-        connection();
         
-        String sql =("SELECT * FROM item ");
-        itemsToPrint = new ArrayList<ItemN>();
-        //TRY add icon
-         try{
-       System.out.println("//////////////////////////////////////////////////////////////////////////");
        
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ResultSet rs = ps.executeQuery();
+       itemsToPrint= new ArrayList<Item>();
         int smallInt=-1;
         int bigInt =300;
         System.out.println(prices);
@@ -94,49 +74,49 @@ public class Database {
         System.out.println("-----------------------------------------------------");
         }
         
-        while(rs.next()) {
+        for(int i=0;i<itemsList.size();i++) {
             if(cS==true && tS==false && pS==false)
             {
-                if(categoryName.equals(rs.getString("category")))
+                if(categoryName.equals(itemsList.get(i).getCategory()))
                  {
-             
-                    ItemN item = new ItemN(rs.getString("category"),rs.getString("description"),rs.getString("price"),rs.getString("cond"),rs.getString("title"));
+                    
+                    Item item = new Item(itemsList.get(i).getTitle(),itemsList.get(i).getCategory(),itemsList.get(i).getDescription(),itemsList.get(i).getPrice(),itemsList.get(i).getDescription(),itemsList.get(i).getPhoto(),itemsList.get(i).getItemId());
                     itemsToPrint.add(item);
                  }
            //System.out.println(price);
             }
            else if(cS==false && tS==true && pS==false) //0 1 0
            {
-                if(type.equals(rs.getString("cond")))
+                if(type.equals(itemsList.get(i).getCondition()))
                  {
              
-                    ItemN item = new ItemN(rs.getString("category"),rs.getString("description"),rs.getString("price"),rs.getString("cond"),rs.getString("title"));
+                    Item item = new Item(itemsList.get(i).getTitle(),itemsList.get(i).getCategory(),itemsList.get(i).getDescription(),itemsList.get(i).getPrice(),itemsList.get(i).getDescription(),itemsList.get(i).getPhoto(),itemsList.get(i).getItemId());
                     itemsToPrint.add(item);
                 }
            }
            else if(cS==true && tS==true && pS==false) //1 1 0
            {
-                if(categoryName.equals(rs.getString("category")) && type.equals(rs.getString("cond")))
+                if(type.equals(itemsList.get(i).getCondition()) && categoryName.equals(itemsList.get(i).getCategory()))
                 {
              
-                     ItemN item = new ItemN(rs.getString("category"),rs.getString("description"),rs.getString("price"),rs.getString("cond"),rs.getString("title"));
+                    Item item = new Item(itemsList.get(i).getTitle(),itemsList.get(i).getCategory(),itemsList.get(i).getDescription(),itemsList.get(i).getPrice(),itemsList.get(i).getDescription(),itemsList.get(i).getPhoto(),itemsList.get(i).getItemId());
                      itemsToPrint.add(item);
                 }
            }
            else if(cS==false && tS==false && pS==false) //0 0 0
            {
-               ItemN item = new ItemN(rs.getString("category"),rs.getString("description"),rs.getString("price"),rs.getString("cond"),rs.getString("title"));
+               Item item = new Item(itemsList.get(i).getTitle(),itemsList.get(i).getCategory(),itemsList.get(i).getDescription(),itemsList.get(i).getPrice(),itemsList.get(i).getDescription(),itemsList.get(i).getPhoto(),itemsList.get(i).getItemId());
                itemsToPrint.add(item);
            }
            else if(cS==true && tS==false && pS==true) //1 0 1
            {
                if(prices!=null)
                {
-               if(categoryName.equals(rs.getString("category")) && Integer.parseInt(rs.getString("price"))>smallInt && Integer.parseInt(rs.getString("price"))<bigInt)
+               if(categoryName.equals(itemsList.get(i).getCategory()) && (itemsList.get(i).getPrice())>smallInt && (itemsList.get(i).getPrice())<bigInt)
                 {
              
-                     ItemN item = new ItemN(rs.getString("category"),rs.getString("description"),rs.getString("price"),rs.getString("cond"),rs.getString("title"));
-                     itemsToPrint.add(item);
+                    Item item = new Item(itemsList.get(i).getTitle(),itemsList.get(i).getCategory(),itemsList.get(i).getDescription(),itemsList.get(i).getPrice(),itemsList.get(i).getDescription(),itemsList.get(i).getPhoto(),itemsList.get(i).getItemId());
+               itemsToPrint.add(item);
                 }
                }
            }
@@ -144,12 +124,11 @@ public class Database {
            {
                if(prices!=null)
                {
-               if(categoryName.equals(rs.getString("category")) && Integer.parseInt(rs.getString("price"))>smallInt && Integer.parseInt(rs.getString("price"))<bigInt &&
-                    type.equals(rs.getString("cond")) )
+               if(categoryName.equals(itemsList.get(i).getCategory()) && (itemsList.get(i).getPrice())>smallInt &&(itemsList.get(i).getPrice())<bigInt && type.equals(itemsList.get(i).getCondition()))
                 {
              
-                     ItemN item = new ItemN(rs.getString("category"),rs.getString("description"),rs.getString("price"),rs.getString("cond"),rs.getString("title"));
-                     itemsToPrint.add(item);
+                     Item item = new Item(itemsList.get(i).getTitle(),itemsList.get(i).getCategory(),itemsList.get(i).getDescription(),itemsList.get(i).getPrice(),itemsList.get(i).getDescription(),itemsList.get(i).getPhoto(),itemsList.get(i).getItemId());
+               itemsToPrint.add(item);
                 }
                }
            }
@@ -157,11 +136,11 @@ public class Database {
            {
                if(prices!=null)
                {
-               if(Integer.parseInt(rs.getString("price"))>smallInt && Integer.parseInt(rs.getString("price"))<bigInt)
+               if((itemsList.get(i).getPrice())>smallInt && (itemsList.get(i).getPrice())<bigInt)
                 {
              
-                     ItemN item = new ItemN(rs.getString("category"),rs.getString("description"),rs.getString("price"),rs.getString("cond"),rs.getString("title"));
-                     itemsToPrint.add(item);
+                     Item item = new Item(itemsList.get(i).getTitle(),itemsList.get(i).getCategory(),itemsList.get(i).getDescription(),itemsList.get(i).getPrice(),itemsList.get(i).getDescription(),itemsList.get(i).getPhoto(),itemsList.get(i).getItemId());
+               itemsToPrint.add(item);
                 }
                }
            }
@@ -169,28 +148,17 @@ public class Database {
            {
                if(prices!=null)
                {
-               if(Integer.parseInt(rs.getString("price"))>smallInt && Integer.parseInt(rs.getString("price"))<bigInt && type.equals(rs.getString("cond")))
+               if(itemsList.get(i).getPrice()>smallInt && (itemsList.get(i).getPrice())<bigInt && type.equals(itemsList.get(i).getCondition()))
                 {
              
-                     ItemN item = new ItemN(rs.getString("category"),rs.getString("description"),rs.getString("price"),rs.getString("cond"),rs.getString("title"));
-                     itemsToPrint.add(item);
+                     Item item = new Item(itemsList.get(i).getTitle(),itemsList.get(i).getCategory(),itemsList.get(i).getDescription(),itemsList.get(i).getPrice(),itemsList.get(i).getDescription(),itemsList.get(i).getPhoto(),itemsList.get(i).getItemId());
+               itemsToPrint.add(item);
                 }
                }
            }
       }
-        
-        /*for(int i=0;i<itemsToPrint.size();i++)
-        {
-            System.out.println(itemsToPrint.get(i).toString());
-        }*/
-        
-         }
-         catch(Exception e)
-         {
-             System.out.println(e.getMessage());
-         }
-         
     }
+        
     public String PrintItem(int i)
     {
         if(itemsToPrint.size() > 0 && itemsToPrint.size() > i)
@@ -200,10 +168,17 @@ public class Database {
         
     }
     
-    public ArrayList<ItemN> getArr()
+    public ArrayList<Item> getArr()
     {
         return itemsToPrint;
     }
+    
+    public ArrayList< Item> getArrN()
+    {
+       return itemsList;
+    }
+            
+           
     
     ////////////////////////////////Berk Search Item////////////////////
       
@@ -211,22 +186,17 @@ public void searchItem(String keyword)
     {
         int itemId = 0;
         String sql = "";
-        searchItems = new ArrayList<ItemN>();
+        searchItems = new ArrayList<Item>();
         
         sql = "SELECT * FROM item WHERE title LIKE '%" + keyword + "%'";
 
-        try {
-            connection();
-            PreparedStatement praparedStatement = this.connection.prepareStatement(sql);
-            //int updateResult = praparedStatement.executeUpdate();
-            ResultSet rs = praparedStatement.executeQuery();
-            
-             while(rs.next()) {
-                 System.out.println(rs.getString("title"));
-           if(rs.getString("title").toLowerCase().contains((keyword).toLowerCase()))
+        
+             for(int i=0; i<itemsList.size();i++) {
+                 System.out.println(itemsList.get(i).getTitle());
+           if(itemsList.get(i).getTitle().toLowerCase().contains((keyword).toLowerCase()))
            {
              
-               ItemN item = new ItemN(rs.getString("category"),rs.getString("description"),rs.getString("price"),rs.getString("cond"),rs.getString("title"));
+               Item item = new Item(itemsList.get(i).getTitle(),itemsList.get(i).getCategory(),itemsList.get(i).getDescription(),itemsList.get(i).getPrice(),itemsList.get(i).getDescription(),itemsList.get(i).getPhoto(),itemsList.get(i).getItemId());
                searchItems.add(item);
                System.out.println(searchItems.size());
            }
@@ -240,19 +210,16 @@ public void searchItem(String keyword)
         }
         
          }
-         catch(Exception e)
-         {
-             System.out.println(e.getMessage());
-         }
+        
 
 
         
-        }
+      
     public String PrintSearch(int i)
     {
         return searchItems.get(i).toString();
     }
-    public ArrayList<ItemN> getSearchArr()
+    public ArrayList<Item> getSearchArr()
     {
         return searchItems;
     }
@@ -304,7 +271,7 @@ public void searchItem(String keyword)
                 */
                 
                 getItems();
-                getIcons();
+                //getIcons();
                 
                 if(!(items.equals(""))){
                     itemsId = items.split("\\,");
@@ -332,7 +299,7 @@ public void searchItem(String keyword)
                         
                     }
                 }
-                client = new Client(username, password, name, surname, email, university, userId, messagesList, myItemsList);
+                client = new Client(username, password, name, surname, email, university, userId, messagesList, myItemsList, -1);
                 
             }
             
@@ -348,7 +315,7 @@ public void searchItem(String keyword)
         
         imagesList = new ArrayList<ImageIcon>();
         
-        String getIcons = "SELECT * FROM IMAGE WHERE id = ?";
+        String getIcons = "SELECT * FROM image WHERE id = ?";
         int i = 0;
         
         
@@ -464,7 +431,7 @@ this.connection.prepareStatement(update);
             if(rs.next()){
                 //System.out.println();
                 JOptionPane.showMessageDialog(null, "Username is taken", "USERNAME IS TAKEN!" , JOptionPane.INFORMATION_MESSAGE);
-                return justClient;
+                return client;
             }
         }catch (SQLException ex) {
           System.out.println(ex.getMessage());
@@ -480,7 +447,7 @@ this.connection.prepareStatement(update);
           
             if(rs.next()){
                 JOptionPane.showMessageDialog(null, "Email is used", "EMAIL IS USED!" , JOptionPane.INFORMATION_MESSAGE);
-                return justClient;
+                return client;
             }
         }catch (SQLException ex) {
           System.out.println(ex.getMessage());
@@ -512,12 +479,14 @@ this.connection.prepareStatement(update);
         
         ActivationCode = (int) (Math.random()*9999) + 1;
          
-        justClient = new NewClient(username,password,name,surname,email,uniname,userId,justMessage, justItem, ActivationCode);
+        System.out.println("\n     ACTIVASION CODE IS:    " + ActivationCode + "\n     ");
         
-        SendMail mail = new SendMail(name, surname, email, ActivationCode);
+        client = new Client(username,password,name,surname,email,uniname,userId,justMessage, justItem, ActivationCode);
+        
+        //SendMail mail = new SendMail(name, surname, email, ActivationCode);
        
 
-        return justClient;
+        return client;
     }
     
     
@@ -529,13 +498,13 @@ this.connection.prepareStatement(update);
         try{
         connection(); 
         PreparedStatement psAddClient = connection.prepareStatement(addClientSql);
-        psAddClient.setInt(1, justClient.getUserId());
-        psAddClient.setString(2, justClient.getUserName());
-        psAddClient.setString(3, justClient.getPassword());
-        psAddClient.setString(4, justClient.getName());
-        psAddClient.setString(5, justClient.getSurname());
-        psAddClient.setString(6, justClient.getEmail());
-        psAddClient.setString(7, justClient.getUniversity());
+        psAddClient.setInt(1, client.getUserId());
+        psAddClient.setString(2, client.getUserName());
+        psAddClient.setString(3, client.getPassword());
+        psAddClient.setString(4, client.getName());
+        psAddClient.setString(5, client.getSurname());
+        psAddClient.setString(6, client.getEmail());
+        psAddClient.setString(7, client.getUniversity());
         psAddClient.setString(8, "");
         psAddClient.setString(9, "");
         
@@ -549,8 +518,9 @@ this.connection.prepareStatement(update);
     }
     
     
-    
     public ArrayList<Item> getItems(){
+        
+        itemsList = new ArrayList<Item>();
         
         String sqlItem = "SELECT * FROM ITEM";
                 try{
@@ -559,7 +529,7 @@ this.connection.prepareStatement(update);
                 ResultSet rsItem = psItem.executeQuery();
                 
                 int counterItem = 0;
-                        
+                  System.out.println("*******************************************");      
                 while(rsItem.next()){
                     
                    int itemId = rsItem.getInt("ItemId");
@@ -569,11 +539,20 @@ this.connection.prepareStatement(update);
                    String description = rsItem.getString("description");
                    String priceString = rsItem.getString("price");
                    double price = Double.parseDouble(priceString);
-                   ImageIcon photo = null;    //Photo yapılacak
+                    Blob blob = rsItem.getBlob("photo");
+                   int blobLength = (int) blob.length();  
+
+                    byte[] bytes = blob.getBytes(1, blobLength);
+                    //blob.free();     
+                       //Photo yapılacak
+                   ImageIcon photo = new ImageIcon(bytes);
+                   System.out.println(photo);
+                   System.out.println("*******************************************");
                    String condition = rsItem.getString("cond");
                    
                                      
-                   Item item = new Item(title, category, description, price, condition, photo, itemId);
+                   Item item = new Item(title, category, description, price, condition, null, itemId);
+                   item.setPhoto(photo);
                    itemsList.add(item);
                    counterItem++;
                 }
@@ -669,7 +648,7 @@ this.connection.prepareStatement(update);
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            this.connection = DriverManager.getConnection("jdbc:mysql://139.179.227.102/besttrade", "ezgi1", "aaa");
+            this.connection = DriverManager.getConnection("jdbc:mysql://localhost/besttrade", "root", "");
             System.out.println("Connection Succesfull");
         } catch (Exception e) {
 
@@ -759,26 +738,31 @@ this.connection.prepareStatement(update);
     }
     
     ///////////////////////////////////////////////////////////OZER/////////////////////////////////////////////////////////////////////////
-     public boolean addItem(String category,String description, String
-price, String condition, ImageIcon photo,String title, String path)
+     public boolean addItem(String category,String description, String price, String condition, ImageIcon photo,String title, String path) throws FileNotFoundException
    {
 
 
        int itemId = (int) (Math.random()*9999) + 1;
 
        ImageIcon icon = new ImageIcon();
-       String sql =("INSERT INTO item(itemId,category,description,price,cond,title) " + "VALUES (?,?,?,?,?,?)");
+       String sql =("INSERT INTO item(itemId,category,description,price,photo,cond,title) " + "VALUES (?,?,?,?,?,?,?)");
        String sqlUser = "SELECT * FROM CLIENT WHERE UserId = ?";
 
        try{
            connection();
+           if(path==null)
+               path="C:\\Users\\Emre\\Desktop\\noPhoto.png";
+           File imgfile = new File(path);
+          
+        FileInputStream fin = new FileInputStream(imgfile);
            PreparedStatement ps = connection.prepareStatement(sql);
            ps.setInt(1, itemId);
            ps.setString(2,category);
            ps.setString(3, description);
            ps.setString(4, price);
-           ps.setString(5, condition);
-           ps.setString(6, title);
+           ps.setBinaryStream(5, (InputStream)fin,(int)imgfile.length());
+           ps.setString(6, condition);
+           ps.setString(7, title);
 
            ps.executeUpdate();
 
@@ -788,7 +772,10 @@ price, String condition, ImageIcon photo,String title, String path)
 
            if(rs.next()){
                 String items = rs.getString("Items");
+                if(!(items.equals("")))
                 items = items + "," + itemId;
+                else
+                items=itemId + "," ;
                 String sqlUpdate =("UPDATE CLIENT SET Items = ? WHERE UserId = ?");
                 PreparedStatement psUpdate =
 connection.prepareStatement(sqlUpdate);
@@ -819,7 +806,7 @@ connection.prepareStatement(sqlUpdate);
          try{
              
         File imgfile = new File(path);
-            // Image picture = ImageIO.read(new File("C:\\Users\\Emre\\Desktop\\3M.BestTrade-unstable4\\JavaApplication1\\JavaApplication1\\good.png"));
+          
         FileInputStream fin = new FileInputStream(imgfile);
         PreparedStatement ps = connection.prepareStatement(sqlIm);
         ps.setString(1,itemId + "");
@@ -863,7 +850,7 @@ connection.prepareStatement(sqlUpdate);
            
             
             getItems();
-            getIcons();
+           // getIcons();
             
              myItemsList = new ArrayList <Item>();
             
@@ -893,7 +880,7 @@ connection.prepareStatement(sqlUpdate);
                         
                     }
                 }
-                client = new Client(userName, pw, name, surname, email, university, userId, messagesList, myItemsList);
+                client = new Client(userName, pw, name, surname, email, university, userId, messagesList, myItemsList, -1);
                 
             }
             

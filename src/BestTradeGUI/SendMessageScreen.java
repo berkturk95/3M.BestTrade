@@ -7,7 +7,7 @@ package BestTradeGUI;
 
 import static BestTradeGUI.UIManager.*;
 import Database.Database;
-import ModelClasses.ItemN;
+import ModelClasses.Item;
 
 /**
  *
@@ -19,8 +19,8 @@ public class SendMessageScreen extends javax.swing.JPanel {
      * Creates new form SendMessagePanel
      */
     Database database;
-    ItemN item;
-    public SendMessageScreen(Database database,ItemN item) {
+    Item item;
+    public SendMessageScreen(Database database,Item item) {
         this.database = database;
         this.item = item;
         initComponents();

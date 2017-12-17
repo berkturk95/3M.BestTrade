@@ -22,10 +22,10 @@ public class Client{
      private int userId;
      private ArrayList <Message> messages;
      private ArrayList <Item> items;
-     
+     private int ActivationCode;
      
     public Client(String userName, String password,String name, String surname,String email, String 
-            university, int userId, ArrayList <Message> messages, ArrayList <Item> items){
+            university, int userId, ArrayList <Message> messages, ArrayList <Item> items, int ActivationCode){
         
         
         this.userName = userName;
@@ -37,9 +37,19 @@ public class Client{
         this.userId = userId;
         this.messages = messages;
         this.items = items;
-        
+        this.ActivationCode = ActivationCode;
     }
 
+    public int getActivationCode() {
+        return ActivationCode;
+    }
+
+    public void setActivationCode(int ActivationCode) {
+        this.ActivationCode = ActivationCode;
+    }
+    
+    
+    
     public String getUserName() {
         return userName;
     }

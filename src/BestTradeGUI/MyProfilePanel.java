@@ -15,7 +15,7 @@ import ModelClasses.*;
  * @author berkt
  */
 public class MyProfilePanel extends javax.swing.JPanel {
-    Client theclient;
+    //Client theclient;
     Database database;
     /**
      * Creates new form MyProfilePanel
@@ -25,11 +25,12 @@ public class MyProfilePanel extends javax.swing.JPanel {
         initComponents();
         
         if(database.client != null){
-            theclient = database.client;
-            nameLabel.setText(client.getName() + " " +client.getSurname());
-            uniLabel.setText(client.getUniversity());
-            mailLabel.setText(client.getEmail());
-            usernameLabel.setText(client.getUserName());
+            //theclient = database.client;
+            
+            nameLabel.setText(database.client.getName() + " " +database.client.getSurname());
+            uniLabel.setText(database.client.getUniversity());
+            mailLabel.setText(database.client.getEmail());
+            usernameLabel.setText(database.client.getUserName());
         }
     }
 

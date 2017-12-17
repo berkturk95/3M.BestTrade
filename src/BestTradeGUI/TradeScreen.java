@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class TradeScreen extends javax.swing.JPanel {
 
     
-    Client client;
+    
     ArrayList <Item> items;
     ArrayList <Message> messages;
     Database db;

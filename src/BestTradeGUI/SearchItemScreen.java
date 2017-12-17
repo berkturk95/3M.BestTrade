@@ -23,7 +23,9 @@ import ModelClasses.Item;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import static BestTradeGUI.UIManager.*;
-import ModelClasses.ItemN;
+import ModelClasses.Item;
+import java.awt.Image;
+import java.io.IOException;
 import javax.swing.AbstractButton;
 import javax.swing.JLabel;
 
@@ -46,15 +48,16 @@ public class SearchItemScreen extends javax.swing.JPanel {
     private boolean categorySelected;
     private boolean typeSelected;
     private boolean priceSelected;
-    ItemN item;
+    Item item;
     int countClick, whichLabel,itemNo, selectedItemSize;
     String type;
-    ArrayList<ItemN> selectedItemList;
+    ArrayList<Item> selectedItemList = new ArrayList<Item>();
     ArrayList<JButton> buttonsArr = new ArrayList<JButton>();
     ArrayList<JLabel> labelArr = new ArrayList<JLabel>();
     ArrayList<JLabel> labelPriceArr = new ArrayList<JLabel>();
+    
 
-    public SearchItemScreen(Database database) {
+    public SearchItemScreen(Database database) throws IOException {
          
         this.database=database;
          categorySelected=false;
@@ -63,12 +66,13 @@ public class SearchItemScreen extends javax.swing.JPanel {
          countClick=0;
          whichLabel=0;
          itemNo = 8;
+         database.refresh();
          database.getItem(categoryName,price,typeName,categorySelected,typeSelected,priceSelected);
          selectedItemList = database.getArr();
          selectedItemSize = selectedItemList.size();
-         
+         System.out.println("constructor size: " + selectedItemSize);
          initComponents();
-        
+         
          
         buttonsArr.add(Button1);
         buttonsArr.add(Button2);
@@ -95,7 +99,8 @@ public class SearchItemScreen extends javax.swing.JPanel {
         labelPriceArr.add(price7);
         labelPriceArr.add(price8);
         printItems(countClick);
-        item = selectedItemList.get(0);
+        
+        item = database.getArr().get(0);
     }
 
     /**
@@ -121,6 +126,7 @@ public class SearchItemScreen extends javax.swing.JPanel {
         viewMyProfileButton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
         searchButton = new javax.swing.JButton();
+        searchF2 = new javax.swing.JTextField();
         itemPanel = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         label5 = new javax.swing.JLabel();
@@ -273,6 +279,12 @@ public class SearchItemScreen extends javax.swing.JPanel {
             }
         });
 
+        searchF2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchF2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout abovePanelLayout = new javax.swing.GroupLayout(abovePanel);
         abovePanel.setLayout(abovePanelLayout);
         abovePanelLayout.setHorizontalGroup(
@@ -280,11 +292,16 @@ public class SearchItemScreen extends javax.swing.JPanel {
             .addGroup(abovePanelLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(149, 149, 149)
-                .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(abovePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(abovePanelLayout.createSequentialGroup()
+                        .addGap(149, 149, 149)
+                        .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(abovePanelLayout.createSequentialGroup()
+                        .addGap(107, 107, 107)
+                        .addComponent(searchF2, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(34, 34, 34)
                 .addComponent(searchButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
                 .addComponent(viewMyProfileButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42))
         );
@@ -299,7 +316,8 @@ public class SearchItemScreen extends javax.swing.JPanel {
                 .addGroup(abovePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(viewMyProfileButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchButton))
+                    .addComponent(searchButton)
+                    .addComponent(searchF2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -835,13 +853,13 @@ public class SearchItemScreen extends javax.swing.JPanel {
         selectedItemList = database.getArr();
         selectedItemSize = selectedItemList.size();
         countClick =0;
-        searchField.setText("");
+        searchF2.setText("");
         printItems(countClick);
     }//GEN-LAST:event_clearButtonMouseClicked
     
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         // TODO add your handling code here:
-        String keyword = searchField.getText();
+        String keyword = searchF2.getText();
         database.searchItem(keyword);
         selectedItemList = database.getSearchArr();
         selectedItemSize = selectedItemList.size();
@@ -864,12 +882,20 @@ public class SearchItemScreen extends javax.swing.JPanel {
         searchField.setText(""); 
     }//GEN-LAST:event_searchFieldMouseClicked
 
+    private void searchF2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchF2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchF2ActionPerformed
+
     void printItems(int clickCount){
         int lastpage = selectedItemSize / itemNo;
-        if((clickCount > lastpage  && selectedItemSize % itemNo != 0) || clickCount > selectedItemSize/itemNo +1 && selectedItemSize % itemNo == 0)
+        
+        if((clickCount > lastpage  && selectedItemSize % itemNo != 0))
             clickCount = lastpage;
+        if( clickCount >= selectedItemSize/itemNo && selectedItemSize % itemNo == 0)
+            clickCount = lastpage-1;
         if(clickCount < 0)
             clickCount = 0;
+        System.out.println("lastpage : " + lastpage + "selectedsize: " + selectedItemSize + "countclick: " + clickCount);
         countClick = clickCount;
         int i = clickCount*itemNo;
 
@@ -877,11 +903,9 @@ public class SearchItemScreen extends javax.swing.JPanel {
         
             if(i < selectedItemSize){
                 labelArr.get(j).setText(selectedItemList.get(i).getTitle());
-                labelPriceArr.get(j).setText(selectedItemList.get(i).getPrice());
-                if(i % 2 == 0)
-                buttonsArr.get(j).setIcon(database.imagesList.get(0));
-                else
-                    buttonsArr.get(j).setIcon(database.imagesList.get(2));
+                labelPriceArr.get(j).setText(selectedItemList.get(i).getPrice()+"");
+                buttonsArr.get(j).setIcon(selectedItemList.get(i).getPhoto());
+                
                 labelArr.get(j).setVisible(true);
                 labelPriceArr.get(j).setVisible(true);
                 buttonsArr.get(j).setVisible(true);
@@ -954,6 +978,7 @@ public class SearchItemScreen extends javax.swing.JPanel {
     private javax.swing.JLabel priceLabel;
     private javax.swing.JComboBox<String> priceRange;
     private javax.swing.JButton searchButton;
+    private javax.swing.JTextField searchF2;
     private javax.swing.JTextField searchField;
     private javax.swing.JComboBox<String> typeComboBox;
     private javax.swing.JLabel typeLabel;

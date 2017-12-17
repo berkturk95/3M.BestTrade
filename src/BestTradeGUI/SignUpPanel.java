@@ -237,14 +237,14 @@ public class SignUpPanel extends javax.swing.JPanel {
         }
         else{
             
-            Client justClient =null;
+            Client client =null;
             try {
-                justClient = database.signUp(name, surname, username, password, uniname, email);
+                client = database.signUp(name, surname, username, password, uniname, email);
             } catch (MessagingException ex) {
                 Logger.getLogger(SignUpPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-            if(justClient != null){
+            if(client != null){
                 
                  ActivationCodeScreen ActivationCodeScreen = new ActivationCodeScreen(database);
                 UIManager.frame.add(ActivationCodeScreen);
@@ -254,7 +254,7 @@ public class SignUpPanel extends javax.swing.JPanel {
             }
             else{
                 
-                JOptionPane.showMessageDialog(null, "Error occured during sign up", "ERROR" , JOptionPane.INFORMATION_MESSAGE);
+                //JOptionPane.showMessageDialog(null, "Error occured during sign up", "ERROR" , JOptionPane.INFORMATION_MESSAGE);
             }
         }
         

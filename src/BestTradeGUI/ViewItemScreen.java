@@ -7,7 +7,8 @@ package BestTradeGUI;
 
 import static BestTradeGUI.UIManager.*;
 import Database.Database;
-import ModelClasses.ItemN;
+import ModelClasses.Item;
+
 import java.awt.Color;
 
 /**
@@ -16,16 +17,16 @@ import java.awt.Color;
  */
 public class ViewItemScreen extends javax.swing.JPanel {
     Database database;
-    ItemN item;
+    Item item;
     /**
      * Creates new form ViewItem
      */
-    public ViewItemScreen(Database db,ItemN item) {
+    public ViewItemScreen(Database db,Item item) {
         database = db;
         this.item = item;
         initComponents();
         
-        PriceText.setText(item.getPrice());
+        PriceText.setText(item.getPrice()+"");
         titleText.setText(item.getTitle());
         descriptionText.setText(item.getDescription());
         ConditionText.setText(item.getCondition());

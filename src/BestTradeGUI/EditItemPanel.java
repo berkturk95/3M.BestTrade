@@ -324,10 +324,16 @@ public class EditItemPanel extends javax.swing.JPanel {
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
         database.deleteItem(item.getItemId());
+        try {
+            database.refresh();
+        } catch (IOException ex) {
+            Logger.getLogger(EditItemPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
         MyProductsPanel myProductsPanel = new MyProductsPanel(database);
         UIManager.frame.add(myProductsPanel);
         setVisible(false);
         myProductsPanel.setVisible(true);
+        
                                       
     }//GEN-LAST:event_deleteButtonActionPerformed
 

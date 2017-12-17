@@ -12,6 +12,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import static BestTradeGUI.UIManager.*;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 
 
@@ -291,7 +294,11 @@ public class AddItemScreen extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Title,have to be selected");
         
         if(category!=null && condition!=null &&titleName!=null)
-        database.addItem(category,description,price,condition,icon,titleName, path);
+        try {
+            database.addItem(category,description,price,condition,icon,titleName, path);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(AddItemScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         
         TradeScreen SignUpPanel = new TradeScreen(database);

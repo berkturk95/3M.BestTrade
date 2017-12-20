@@ -14,4 +14,5 @@ BestTrade is a platform that can enable users to buy and sell stuff like furnitu
 
 
 P.S: REPORTS ARE IN doc FILE in master branch. SOURCE CODES ARE IN src FILE and unstable branches have the previous version of code.
+
 P.S2: Final code is in masterFinalCode branch. Jar file is in same branch dist folder

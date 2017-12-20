@@ -67,7 +67,7 @@ public SendMail(String name, String surname, String email, int ActivationCode){
 
         // Send message
         Transport transport = session.getTransport("smtp");
-        transport.connect("smtp.gmail.com", "berker.kirdok@gmail.com", "hannibael531162x");
+        transport.connect("smtp.gmail.com", "berker.kirdok@gmail.com", "****"); //Wrote *** for password because of privacy issue
         System.out.println("Transport: "+transport.toString());
         transport.sendMessage(message, message.getAllRecipients());
 
